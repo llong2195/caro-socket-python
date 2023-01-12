@@ -31,11 +31,10 @@ class Threading_socket():
                 self.dataReceive = self.conn.recv(
                     1024).decode()  # Đọc dữ liệu server trả về
                 if (self.dataReceive != ""):
-                    print("client : {self.dataReceive}")
+                    print(f"client {self.dataReceive}")
                     friend = self.dataReceive.split("|")[0]
                     action = self.dataReceive.split("|")[1]
                     if (action == "hit" and friend == "server"):
-                        #     print(self.dataReceive)
                         x = int(self.dataReceive.split("|")[2])
                         y = int(self.dataReceive.split("|")[3])
                         self.gui.handleButton(x, y)
@@ -73,8 +72,8 @@ class Threading_socket():
             while True:
                 # Đọc nội dung client gửi đến
                 self.dataReceive = self.conn.recv(1024).decode()
+                print(f"server : {self.dataReceive}")
                 if (self.dataReceive != ""):
-                    print("server : {self.dataReceive}")
                     friend = self.dataReceive.split("|")[0]
                     action = self.dataReceive.split("|")[1]
                     if (action == "hit" and friend == "client"):

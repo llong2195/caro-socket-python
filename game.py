@@ -14,12 +14,13 @@ class Window(tk.Tk):
         self.myTurn = False
         self.Threading_socket = Threading_socket(self)
 
-    def showFrame(self):
+    def showFrame(self): # vẽ giao diện và gắn chức action
         frame1 = tk.Frame(self)
         frame1.pack()
+        #
         frame2 = tk.Frame(self)
         frame2.pack()
-
+        
         Undo = tk.Button(frame1, text="Undo", width=10,  # nút quay lại
                          command=partial(self.Undo, synchronized=True))
         Undo.grid(row=0, column=0, padx=30)
@@ -158,7 +159,7 @@ if __name__ == "__main__":
     try:
         Ox = 15  # Số lượng ô theo trục X
         Oy = 20  # Số lượng ô theo trục Y
-        window = Window()
+        window = Window() # khởi tạo class window ( vẽ giao diện, handle các button )
         window.showFrame()
         window.mainloop()
     except Exception as err:
