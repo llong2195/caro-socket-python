@@ -19,9 +19,9 @@ class Threading_socket():
             self.conn = socket.socket(
                 socket.AF_INET, socket.SOCK_STREAM)  # Cấu hình socket
             self.conn.connect((HOST, PORT))  # tiến hành kết nối đến server
-            self.gui.notification("Đã kết nối tới", str(HOST))
             t1 = threading.Thread(target=self.client)  # tạo luồng chạy client
             t1.start()
+            self.gui.notification("Đã kết nối tới", str(HOST))
         except Exception as err:
             print(f"Unexpected {err=}, {type(err)=}")
 
@@ -31,6 +31,7 @@ class Threading_socket():
                 self.dataReceive = self.conn.recv(
                     1024).decode()  # Đọc dữ liệu server trả về
                 if (self.dataReceive != ""):
+                    print("client : {self.dataReceive}")
                     friend = self.dataReceive.split("|")[0]
                     action = self.dataReceive.split("|")[1]
                     if (action == "hit" and friend == "server"):
@@ -73,9 +74,9 @@ class Threading_socket():
                 # Đọc nội dung client gửi đến
                 self.dataReceive = self.conn.recv(1024).decode()
                 if (self.dataReceive != ""):
+                    print("server : {self.dataReceive}")
                     friend = self.dataReceive.split("|")[0]
                     action = self.dataReceive.split("|")[1]
-                    print(action, friend)
                     if (action == "hit" and friend == "client"):
                         x = int(self.dataReceive.split("|")[2])
                         y = int(self.dataReceive.split("|")[3])

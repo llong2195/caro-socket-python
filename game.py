@@ -13,7 +13,6 @@ class Window(tk.Tk):
         self.name = ""
         self.myTurn = False
         self.Threading_socket = Threading_socket(self)
-        print(self.Threading_socket.name)
 
     def showFrame(self):
         frame1 = tk.Frame(self)
@@ -47,6 +46,7 @@ class Window(tk.Tk):
                 if self.board.count([x, y]) == 0:
                     self.board.append([x, y])
                 if len(self.board) % 2 == 1:
+                    print(self.Threading_socket.name)
                     self.Buts[x, y]['text'] = 'O'
                     self.Threading_socket.sendData(
                         "{}|{}|{}|".format("hit", x, y))
@@ -61,6 +61,7 @@ class Window(tk.Tk):
                     if (self.checkWin(x, y, "X")):
                         self.notification("Winner", "X")
                         self.newGame()
+            print(self.board)
         except Exception as err:
             print(f"Unexpected {err=}, {type(err)=}")
 
